@@ -124,9 +124,13 @@ exports.login = (req, res, next) => {
   require("../config/passport")(passport);
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login"
+    failureRedirect: "/login/error",
   })(req, res, next);
 };
+
+exports.error = (req, res) => {
+  res.render("login", {errors: ["Incorrect username or password."]})
+}
 
 exports.logout = (req, res) => {
   req.logout();

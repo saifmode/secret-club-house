@@ -13,7 +13,7 @@ module.exports = passport => {
         if (err) throw err;
         if (!user) {
           console.log("no user found");
-          return done(null, false, { msg: "Wrong username or password" });
+          return done(null, false, { message: 'Incorrect username or password.' });
         }
 
         // Match password
@@ -22,7 +22,7 @@ module.exports = passport => {
           isMatch
             ? done(null, user)
             : done(null, false, {
-                msg: "Wrong username or password"
+                message: "Wrong username or password."
               });
         });
       });

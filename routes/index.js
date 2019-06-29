@@ -11,6 +11,8 @@ router.post('/signup', index.signup);
 router.get('/login', index.login_form);
 router.post('/login', index.login);
 
+router.get('/login/error', index.error)
+
 router.get('/logout', index.logout);
 
 module.exports = router;
