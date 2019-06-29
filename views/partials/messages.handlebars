@@ -1,0 +1,22 @@
+{{#each messages}}
+
+<div class="messages">
+
+  <div class="message">
+    <div class="message-username">
+      {{#if ../currentUser}}
+      {{this.username}}
+      {{else}}
+      Anonymous
+      {{/if}}
+    </div>
+    <div class="message-content">
+      {{this.content}}
+    </div>
+    <div class="message-date">
+      {{this.date}}
+    </div>
+  </div>
+
+</div>
+{{/each}}

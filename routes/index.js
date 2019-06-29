@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const index = require('../controllers/index');
 
-router.get('/', (req, res) => {
-  res.render('index', {welcome: "Secret Club House"}); 
-})
-
+router.get('/', index.load_index);
 router.post('/', index.post);
 
 router.get('/signup', index.signup_form);

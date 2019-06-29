@@ -2,10 +2,31 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 let User = require("../models/User");
+let Message = require("../models/Message");
+
+exports.load_index = async (req, res) => {
+  let messages = await Message.find({}, (err, messages) =>
+    err ? console.log(err) : messages
+  );
+
+  res.render("index", { welcome: "Secret Club House", messages });
+};
 
 exports.post = (req, res) => {
-  res.send("make a post")
-}
+  if (res.locals.currentUser) {
+    let message = {};
+    message.username = res.locals.currentUser.username;
+    message.userid = res.locals.currentUser._id;
+
+    message.subject = req.body.subject;
+    message.content = req.body.content.trim();
+    new Message(message).save(err =>
+      err ? console.log(err) : res.redirect("/")
+    );
+  } else {
+    res.send("Nice try, smart ass.");
+  }
+};
 
 exports.signup_form = (req, res) => {
   res.render("signup");
@@ -35,15 +56,14 @@ exports.login_form = (req, res) => {
 };
 
 exports.login = (req, res, next) => {
-  require('../config/passport')(passport); 
+  require("../config/passport")(passport);
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login",
-  })(req,res,next)
+    failureRedirect: "/login"
+  })(req, res, next);
 };
 
 exports.logout = (req, res) => {
   req.logout();
   res.redirect("/");
 };
-

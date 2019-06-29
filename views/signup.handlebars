@@ -2,7 +2,7 @@
 <form action="/signup" method="POST">
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" name="username" />
+    <input type="text" name="username" id="username"/>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
@@ -12,3 +12,8 @@
     <button type="submit">Sign up!</button>
   </div>
 </form>
+
+<script>
+const username = document.getElementById("username");
+username.focus();
+</script>

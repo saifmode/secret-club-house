@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/", require("./routes/index"));
-
+app.use("/messages", require("./routes/messages"))
 
 const port = process.env.PORT || 1234
 app.listen(port, () => console.log(`app listening on port ${port}!`));

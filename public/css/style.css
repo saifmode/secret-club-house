@@ -13,6 +13,33 @@ body {
   color: rgba(255, 255, 255, 0.9); 
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  
+}
+
 a {
   color: rgba(255,255,255,0.9);
+}
+
+input {
+
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
 }

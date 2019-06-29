@@ -7,6 +7,10 @@ let UserSchema = new Schema({
   },
   password: {
     type: String,
+  },
+  admin: {
+    type: Boolean,
+    default: false
   }
 });
 
