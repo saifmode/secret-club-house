@@ -1,22 +1,46 @@
-{{#each messages}}
-
 <div class="messages">
-
-  <div class="message">
-    <div class="message-username">
-      {{#if ../currentUser}}
-      {{this.username}}
-      {{else}}
-      Anonymous
+  {{#each messages}}
+    <div class="message no-edit">
+      <div class="message-content">
+        {{this.content}}
+      </div>
+      <div class="message-username">
+        Posted by
+        <div class="username">
+          {{#if ../currentUser}} {{this.username}} {{else}} Anonymous {{/if}}
+        </div>
+      </div>
+      <div class="message-date">
+        {{this.dateFromNow}}
+      </div>
+      {{#if ../currentUser.admin}}
+      <div class="admin-tools hidden">
+        <a href="{{this.url}}/edit" class="btn-admin edit">Edit</a>
+        <a href="{{this.url}}/delete" class="btn-admin delete">Delete</a>
+      </div>
       {{/if}}
     </div>
-    <div class="message-content">
-      {{this.content}}
-    </div>
-    <div class="message-date">
-      {{this.date}}
-    </div>
-  </div>
-
+  {{/each}}
 </div>
-{{/each}}
+
+{{#if currentUser.admin}}
+<script>
+  const messages = Array.from(document.querySelectorAll(".message"));
+  messages.forEach(message => {
+    message.classList.toggle("no-edit");
+    message.classList.toggle("editable");
+    message.addEventListener("click", () => {
+      const allAdminTools = Array.from(
+        document.querySelectorAll(".admin-tools")
+      );
+      allAdminTools.forEach(adminTool => {
+        if (!adminTool.classList.contains("hidden")) {
+          adminTool.classList.toggle("hidden");
+        }
+      });
+      const adminTools = message.querySelector(".admin-tools");
+      adminTools.classList.toggle("hidden");
+    });
+  });
+</script>
+{{/if}}

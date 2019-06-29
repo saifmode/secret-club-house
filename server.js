@@ -8,7 +8,7 @@ const express = require("express"),
 // Configure app
 const app = express();
 
-// Configure Mongoose
+// 🐿 Configure Mongoose
 // put line below in .env, then add .env to .gitignore
 // MY_MONGO_DB = mongodb+srv://saifmode:70Poowalk@cluster0-b4cdn.mongodb.net/test?retryWrites=true&w=majority
 const mongoDb = process.env.MY_MONGO_DB;
@@ -17,11 +17,11 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 db.once("open", () => console.log("We're connected to MongoDB!"));
 
-// Set view engine
+// 👀 Set view engine
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
-// *** MIDDLEWARE ***
+// 🔌 *** MIDDLEWARE 
 // ******************
 // *** Static *******
 app.use(express.static("public"));
@@ -41,9 +41,10 @@ app.use((req, res, next) => {
 // ******************
 // ******************
 
-// Routes
+// 🚠 Routes 🚠
 app.use("/", require("./routes/index"));
-app.use("/messages", require("./routes/messages"))
+app.use("/messages", require("./routes/messages"));
 
+// 👂 Listening
 const port = process.env.PORT || 1234
 app.listen(port, () => console.log(`app listening on port ${port}!`));

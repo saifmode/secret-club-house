@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
 let Schema = mongoose.Schema;
 
 let MessageSchema = new Schema({
@@ -12,9 +11,12 @@ let MessageSchema = new Schema({
     required: true,
   },
   date: {
+    type: Date,
+  },
+  dateFromNow: {
     type: String,
-    default: moment().fromNow(),
-    required: true,
+    default: "many moons ago",
+    required: true
   },
   subject: {
     type: String,
@@ -25,7 +27,12 @@ let MessageSchema = new Schema({
   likes: {
     type: Number,
     default: 0,
-  }
+  },
+});
+
+MessageSchema.virtual('url')
+.get(function() {
+  return 'messages/' + this._id;
 });
 
 let Message = (module.exports = mongoose.model("Message", MessageSchema));

@@ -1,8 +1,6 @@
 <nav>
-  {{#if currentUser}}
-    <a href="/logout">Log out</a>
-  {{else}}
+  {{#unless currentUser}}
     <a href="/login">Log in</a>
     <a href="/signup">Sign up</a>
-  {{/if}}
+  {{/unless}}
 </nav>
