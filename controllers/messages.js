@@ -10,35 +10,58 @@ exports.index = (req, res) => {
 };
 
 exports.load_edit_form = async (req, res) => {
-  if (res.locals.currentUser.admin) {
-    const query = { _id: req.params.id };
+  if (res.locals.currentUser) {
+    if (res.locals.currentUser.admin) {
+      const query = { _id: req.params.id };
 
-    let message = await Message.findById(query, (err, message) =>
-      err ? console.log(err) : message
-    );
+      let message = await Message.findById(query, (err, message) =>
+        err ? console.log(err) : message
+      );
 
-    const date = moment(message.date).format("LLLL");
+      const date = moment(message.date).format("LLLL");
 
-    res.render("edit_message", { message, date });
+      res.render("edit_message", { message, date });
+    } else {
+      res.redirect("/");
+    }
   } else {
     res.redirect("/");
   }
 };
 
-exports.edit = (req, res) => {
-  if (res.locals.currentUser.admin) {
-    const query = { _id: req.params.id };
-    Message.updateOne(query, { $set: { content: req.body.content } }, err =>
-      err ? console.log(err) : res.redirect("/")
-    );
+exports.edit = async (req, res) => {
+  if (res.locals.currentUser) {
+    if (res.locals.currentUser.admin) {
+      const query = { _id: req.params.id };
+      let messageInDb = await Message.findById(query, (err, message) =>
+        err ? console.log(err) : message
+      );
+      console.log("original: " + messageInDb.content);
+      console.log("edited: " + req.body.content);
+      const edited =
+        req.body.content.toString() !== messageInDb.content.toString()
+          ? true
+          : false;
+      Message.updateOne(
+        query,
+        { $set: { content: req.body.content, edited } },
+        err => (err ? console.log(err) : res.redirect("/"))
+      );
+    }
+  } else {
+    res.redirect("/");
   }
 };
 
 exports.delete = (req, res) => {
-  if (res.locals.currentUser.admin) {
-    const query = { _id: req.params.id };
-    Message.deleteOne(query, err =>
-      err ? console.log(err) : res.redirect("/")
-    );
+  if (res.locals.currentUser) {
+    if (res.locals.currentUser.admin) {
+      const query = { _id: req.params.id };
+      Message.deleteOne(query, err =>
+        err ? console.log(err) : res.redirect("/")
+      );
+    }
+  } else {
+    res.redirect("/");
   }
 };

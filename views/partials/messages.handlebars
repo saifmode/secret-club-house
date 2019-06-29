@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="message-date">
-        {{this.dateFromNow}}
+        {{this.dateFromNow}} {{#if this.edited}}(Edited){{/if}}
       </div>
       {{#if ../currentUser.admin}}
       <div class="admin-tools hidden">

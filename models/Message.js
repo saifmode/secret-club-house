@@ -28,6 +28,10 @@ let MessageSchema = new Schema({
     type: Number,
     default: 0,
   },
+  edited: {
+    type: Boolean,
+    default: false
+  }
 });
 
 MessageSchema.virtual('url')

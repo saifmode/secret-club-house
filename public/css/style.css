@@ -131,7 +131,6 @@ footer a:hover {
 
 .message-username {
   text-align: right;
-  cursor: default;
   margin-top: 2px;
   padding: 5px 8px;
   font-size: 13px;
@@ -152,7 +151,6 @@ footer a:hover {
 }
 
 .message-date {
-  cursor: default;
   margin-top: 2px;
   padding: 3px;
   text-align: right;
@@ -230,6 +228,11 @@ textarea {
   background: rgba(255, 255, 255, 0.2);
   resize: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s;
+}
+
+textarea:hover {
+  background: rgba(255,255,255,0.25);
 }
 
 textarea::placeholder {
@@ -300,4 +303,26 @@ button:hover {
 .btn-admin.edit:hover {
   color: rgba(255,255,255,1);
   background-color: rgba(55,235,155,0.3); 
+}
+
+.error {
+  margin: 3px;
+  padding: 8px 13px;
+  text-align: center;
+  background-color: rgba(220, 140, 180, 0.3);
+  color: white;
+  border-radius: 21px;
+  font-size: 13px;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+}
+
+.success {
+    margin: 3px;
+  padding: 8px 13px;
+  text-align: center;
+  background-color: rgba(140, 220, 180, 0.3);
+  color: white;
+  border-radius: 21px;
+  font-size: 13px;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
 }
