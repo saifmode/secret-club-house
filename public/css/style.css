@@ -326,3 +326,13 @@ button:hover {
   font-size: 13px;
   font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
 }
+
+.secret {
+  text-align: center;
+  font-size: 6px;
+  color: white;
+}
+
+.secret i{
+  color: rgba(255,225,225,0.8);
+}

@@ -9,8 +9,6 @@ const express = require("express"),
 const app = express();
 
 // 🐿 Configure Mongoose
-// put line below in .env, then add .env to .gitignore
-// MY_MONGO_DB = mongodb+srv://saifmode:70Poowalk@cluster0-b4cdn.mongodb.net/test?retryWrites=true&w=majority
 const mongoDb = process.env.MY_MONGO_DB;
 mongoose.connect(mongoDb, { useNewUrlParser: true });
 const db = mongoose.connection;
