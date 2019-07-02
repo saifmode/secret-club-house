@@ -77,7 +77,7 @@ exports.signup = async (req, res) => {
   }
 
   // Check secret code
-  let inviteQuery = { _id: "5d17e8fba0184224cbf7811b" };
+  let inviteQuery = { _id: "5d17e8fba0184224cbf7811b" }; // Realise this is a security flaw if live for real
   let invite = await User.findById(inviteQuery, (err, invite) =>
     err ? console.log(err) : invite
   );
